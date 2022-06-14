@@ -9,6 +9,9 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use webvimark\modules\UserManagement\components\GhostNav;
+use webvimark\modules\UserManagement\models\User;
+use webvimark\modules\UserManagement\UserManagementModule;
 
 AppAsset::register($this);
 ?>
@@ -26,36 +29,49 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <header>
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
+  <?php
+  NavBar::begin([
+      'brandLabel' => Yii::$app->name,
+      'brandUrl' => Yii::$app->homeUrl,
+      'options' => [
+          'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+      ],
+  ]);
+  
+  echo Nav::widget([
+    'options' => ['class' => 'navbar-nav'],
+    'encodeLabels' => false,
+    'items' => 
+      User::getCurrentUser() === NULL ? 
+      [
+        ['label'=>'Login', 'url'=>['/user-management/auth/login']],
+      ]
+    :
+      [
+        ['label'=>'Entries', 'url'=>['/entry/index']],
+        ['label'=>'Tags', 'url'=>['/label/index']],
+        (Yii::$app->user->identity->superadmin) ?
+        [
+          'label' => 'Backend routes',
+          'items' => UserManagementModule::menuItems()
+        ] : '',
+        (Yii::$app->user->identity->superadmin) ?
+        [
+          'label' => 'Frontend routes',
+          'items'=>[
+            User::getCurrentUser() === NULL ? ['label'=>'Login', 'url'=>['/user-management/auth/login']] : ['label'=>'Logout', 'url'=>['/user-management/auth/logout']],
+            ['label'=>'Registration', 'url'=>['/user-management/auth/registration']],
+            ['label'=>'Change own password', 'url'=>['/user-management/auth/change-own-password']],
+            ['label'=>'Password recovery', 'url'=>['/user-management/auth/password-recovery']],
+            ['label'=>'E-mail confirmation', 'url'=>['/user-management/auth/confirm-email']],
+          ],
+        ] : '',
+        User::getCurrentUser() === NULL ? ['label'=>'Login', 'url'=>['/user-management/auth/login']] : ['label'=>'Logout', 'url'=>['/user-management/auth/logout']],
+      ],
+    
+  ]);
+  NavBar::end();
+  ?>
 </header>
 
 <main role="main" class="flex-shrink-0">
