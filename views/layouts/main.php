@@ -25,7 +25,7 @@ AppAsset::register($this);
   <?php $this->registerCsrfMetaTags() ?>
   <title><?= Html::encode($this->title) ?></title>
   <?php $this->head() ?>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -48,11 +48,15 @@ AppAsset::register($this);
       User::getCurrentUser() === NULL ?
         [
           ['label' => 'Login', 'url' => ['/user-management/auth/login']],
+          ['label' => 'Rooms', 'url' => ['/room/index']],
+          ['label' => 'Contact Us', 'url' => ['/site/contact']],
         ]
         :
         [
           ['label' => 'Rooms', 'url' => ['/room/index']],
+          ['label' => 'Reservations', 'url' => ['/reservations/index']],
           ['label' => 'Contact Us', 'url' => ['/site/contact']],
+
           (Yii::$app->user->identity->superadmin) ?
             [
               'label' => 'Backend routes',

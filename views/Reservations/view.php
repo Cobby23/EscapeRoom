@@ -13,28 +13,36 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="reservations-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+  <h1><?= Html::encode($model->date) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'room_id',
-            'user_id',
-            'start_time',
-            'status_id',
-        ],
+  <p>
+    <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+      'class' => 'btn btn-danger',
+      'data' => [
+        'confirm' => 'Are you sure you want to delete this item?',
+        'method' => 'post',
+      ],
     ]) ?>
+  </p>
+
+  <?= DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+      // 'id',
+      [
+        'attribute' => 'room_id',
+        'value' => $model->room->name
+      ],
+      // 'room_id',
+      [
+        'attribute' => 'room_id',
+        'value' => $model->user->username
+      ],
+      'date',
+      'status',
+      'hour',
+    ],
+  ]) ?>
 
 </div>
