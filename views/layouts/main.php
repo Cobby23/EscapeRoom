@@ -47,15 +47,17 @@ AppAsset::register($this);
       'items' =>
       User::getCurrentUser() === NULL ?
         [
-          ['label' => 'Login', 'url' => ['/user-management/auth/login']],
           ['label' => 'Rooms', 'url' => ['/room/index']],
           ['label' => 'Contact Us', 'url' => ['/site/contact']],
+          ['label' => 'About Us', 'url' => ['/site/about']],
+          ['label' => 'Login', 'url' => ['/user-management/auth/login']],
         ]
         :
         [
           ['label' => 'Rooms', 'url' => ['/room/index']],
           ['label' => 'Reservations', 'url' => ['/reservations/index']],
           ['label' => 'Contact Us', 'url' => ['/site/contact']],
+          ['label' => 'About Us', 'url' => ['/site/about']],
 
           (Yii::$app->user->identity->superadmin) ?
             [

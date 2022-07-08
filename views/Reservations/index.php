@@ -32,16 +32,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'attribute' => 'room_id',
         'value' => 'room.name'
       ],
-      User::hasRole('Admin') ?
-        [
-          'attribute' => 'user_id',
-          'value' => 'user.username'
-        ] : [],
+      [
+        'attribute' => 'user_id',
+        'format' => 'raw',
+        'value' => function ($model) {
+          return Html::tag('p', $model->user->email ? $model->user->email : 'No Email Provided', ['class' => !$model->user->email ? 'font-weight-bold text-danger' : 'font-weight-bold text-primary']);
+        },
+      ],
       [
         'attribute' => 'status',
         'format' => 'raw',
         'value' => function ($model) {
-          if (User::hasRole('Admin') && $model->status = 'Pending') {
+          if (User::hasRole('Admin') && $model->status === 'Pending') {
             return Html::a('Accept', ['reservations/accept/' . $model->id], ['class' => 'font-weight-bold text-success']) . ' / ' . Html::a('Decline', ['reservations/decline/' . $model->id], ['class' => 'font-weight-bold text-danger']);
           } else {
             $colorClass = '';

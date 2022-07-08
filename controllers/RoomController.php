@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Gallery;
 use app\models\Room;
 use app\models\RoomSearch;
 use yii\web\Controller;
@@ -80,8 +81,10 @@ class RoomController extends Controller
    */
   public function actionView($id)
   {
-    return $this->render('view', [
-      'model' => $this->findModel($id),
+    $gallery = Gallery::find()->where(['room_id' => $id])->one();
+    return $this->redirect([
+      'gallery/view',
+      'id' => $gallery->id,
     ]);
   }
 
@@ -96,6 +99,9 @@ class RoomController extends Controller
 
     if ($this->request->isPost) {
       if ($model->load($this->request->post()) && $model->save()) {
+        $gallery = new Gallery();
+        $gallery->room_id = $model->id;
+        $gallery->save();
         return $this->redirect(['view', 'id' => $model->id]);
       }
     } else {

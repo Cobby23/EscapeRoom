@@ -2,19 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Reservations;
+use app\models\Gallery;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use webvimark\modules\UserManagement\models\User;
-use Yii;
 
 /**
- * ReservationsController implements the CRUD actions for Reservations model.
+ * GalleryController implements the CRUD actions for Gallery model.
  */
-class ReservationsController extends Controller
+class GalleryController extends Controller
 {
   /**
    * @inheritDoc
@@ -23,19 +20,6 @@ class ReservationsController extends Controller
   {
     return array_merge(
       parent::behaviors(),
-      [
-        'access' => [
-          'class' => AccessControl::className(),
-          //'only' => ['*'],
-          'rules' => [
-            [
-              'actions' => ['update', 'create', 'index', 'view', 'delete', 'accept', 'decline'],
-              'allow' => true,
-              'roles' => ['@'],
-            ],
-          ],
-        ],
-      ],
       [
         'verbs' => [
           'class' => VerbFilter::className(),
@@ -48,14 +32,14 @@ class ReservationsController extends Controller
   }
 
   /**
-   * Lists all Reservations models.
+   * Lists all Gallery models.
    *
    * @return string
    */
   public function actionIndex()
   {
     $dataProvider = new ActiveDataProvider([
-      'query' => User::hasRole('Admin') ? Reservations::find() : Reservations::find()->where(['user_id' => Yii::$app->user->id]),
+      'query' => Gallery::find(),
       /*
             'pagination' => [
                 'pageSize' => 50
@@ -74,7 +58,7 @@ class ReservationsController extends Controller
   }
 
   /**
-   * Displays a single Reservations model.
+   * Displays a single Gallery model.
    * @param int $id ID
    * @return string
    * @throws NotFoundHttpException if the model cannot be found
@@ -87,18 +71,18 @@ class ReservationsController extends Controller
   }
 
   /**
-   * Creates a new Reservations model.
+   * Creates a new Gallery model.
    * If creation is successful, the browser will be redirected to the 'view' page.
    * @return string|\yii\web\Response
    */
-  public function actionCreate()
+  public function actionCreate($id)
   {
-    $model = new Reservations();
+    $model = new Gallery();
 
-    if ($this->request->isPost) {
-      if ($model->load($this->request->post()) && $model->save()) {
-        return $this->redirect(['view', 'id' => $model->id]);
-      }
+    $model->setAttribute('room_id', $id);
+
+    if ($model->save()) {
+      return $this->redirect(['view', 'id' => $model->id]);
     } else {
       $model->loadDefaultValues();
     }
@@ -109,7 +93,7 @@ class ReservationsController extends Controller
   }
 
   /**
-   * Updates an existing Reservations model.
+   * Updates an existing Gallery model.
    * If update is successful, the browser will be redirected to the 'view' page.
    * @param int $id ID
    * @return string|\yii\web\Response
@@ -128,28 +112,8 @@ class ReservationsController extends Controller
     ]);
   }
 
-  public function actionAccept($id)
-  {
-    $model = Reservations::find()->where(['id' => $id])->one();
-
-    $model->setAttribute('status', 'Accepted');
-
-    if ($model->save())
-      return $this->redirect(['index']);
-  }
-
-  public function actionDecline($id)
-  {
-    $model = Reservations::find()->where(['id' => $id])->one();
-
-    $model->setAttribute('status', 'Declined');
-
-    $model->save();
-    return $this->redirect(['index']);
-  }
-
   /**
-   * Deletes an existing Reservations model.
+   * Deletes an existing Gallery model.
    * If deletion is successful, the browser will be redirected to the 'index' page.
    * @param int $id ID
    * @return \yii\web\Response
@@ -163,15 +127,15 @@ class ReservationsController extends Controller
   }
 
   /**
-   * Finds the Reservations model based on its primary key value.
+   * Finds the Gallery model based on its primary key value.
    * If the model is not found, a 404 HTTP exception will be thrown.
    * @param int $id ID
-   * @return Reservations the loaded model
+   * @return Gallery the loaded model
    * @throws NotFoundHttpException if the model cannot be found
    */
   protected function findModel($id)
   {
-    if (($model = Reservations::findOne(['id' => $id])) !== null) {
+    if (($model = Gallery::findOne(['id' => $id])) !== null) {
       return $model;
     }
 
