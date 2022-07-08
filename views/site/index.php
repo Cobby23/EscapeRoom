@@ -7,46 +7,48 @@ $this->title = 'My Yii Application';
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
+        <h1 class="display-4">Welcome to IlkoMax Escape Rooms</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Number 1 Escape rooms in Sofia</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+
     </div>
+
+
+
+
 
     <div class="body-content">
 
-        <div class="row">
+        <div class="img-fluid" style="background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c711e4f8-9861-4f9d-bce8-77add26f13f9/d4k5ar3-f87cd8a0-3eec-4bfd-914b-f8061bd96ff7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2M3MTFlNGY4LTk4NjEtNGY5ZC1iY2U4LTc3YWRkMjZmMTNmOVwvZDRrNWFyMy1mODdjZDhhMC0zZWVjLTRiZmQtOTE0Yi1mODA2MWJkOTZmZjcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.5hPFUPgr3nwVhZuFOwtB1IA0L2MfbGMau26yD3skwGw');
+    height: 100vh">
+        </div>
+
+        <div class="row mt-5">
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Target</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>For over 30 years, IlcoMax has been providing the best escape room experiences</p>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Organization</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>With long opening hours and a unique team, we can provide an extremely personalized experience </p>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+
             </div>
+
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Location</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>Convenient location, parking space and food and drinks on site, IlcoMax Escape Rooms is your place for relaxation and fun</p>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+
             </div>
+
+
         </div>
 
     </div>
